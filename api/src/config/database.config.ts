@@ -7,7 +7,7 @@ const connectDB =  new DataSource({
     url: process.env.DATABASE_URI,
     logging: false,
     synchronize: true,
-    entities: ["./src/**/*.entity.ts"],
+    entities: ["./src/**/*.entity.{ts,js}"],
 })
 
 connectDB

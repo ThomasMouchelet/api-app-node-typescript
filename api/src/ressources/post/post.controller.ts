@@ -1,4 +1,5 @@
 import { Router } from "express";
+import { NotFoundException } from "../../utils/exception";
 import PostService from "./post.service";
 
 const PostController = Router()
@@ -16,8 +17,40 @@ PostController.post(endPoint, async (req, res) => {
     res.send(post);
 })
 
-// get One
-// delete
-// update
+PostController.get(`${endPoint}/:id`, async (req, res, next) => {
+    try {
+        const post = await postService.findOne(+req.params.id)
+        if (!post) {
+            throw new NotFoundException("Post not found")
+        }
+        return res.send(post);
+    } catch (error) {
+        next(error)
+    }
+})
+
+PostController.delete(`${endPoint}/:id`, async (req, res, next) => {
+    try {
+        const post = await postService.delete(+req.params.id)
+        if (!post) {
+            throw new NotFoundException("Post not found")
+        }
+        res.send(post);
+    } catch (error) {
+        next(error)
+    }
+})
+
+PostController.put(`${endPoint}/:id`, async (req, res, next) => {
+    try {
+        const post = await postService.update(+req.params.id, req.body)
+        if (!post) {
+            throw new NotFoundException("Post not found")
+        }
+        res.send(post);
+    } catch (error) {
+        next(error)
+    }
+})
 
 export default PostController;
