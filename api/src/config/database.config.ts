@@ -5,7 +5,7 @@ dotenv.config();
 const connectDB =  new DataSource({
     type: "postgres",
     url: process.env.DATABASE_URI,
-    logging: false,
+    logging: true,
     synchronize: true,
     entities: ["./src/**/*.entity.{ts,js}"],
 })

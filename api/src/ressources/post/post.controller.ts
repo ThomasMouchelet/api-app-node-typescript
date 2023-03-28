@@ -8,7 +8,9 @@ const postService = new PostService()
 const endPoint = "/posts"
 
 PostController.get(endPoint, async (req, res) => {
-    const postsList = await postService.findAll()
+    const query = req.query
+    console.log("query: ", query)
+    const postsList = await postService.findAll(query)
     res.send(postsList);
 })
 
