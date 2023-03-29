@@ -1,8 +1,6 @@
 import { NextFunction, Request, Response } from 'express'
 
 export const ExceptionsHandler = (err: any, req: Request, res: Response, next: NextFunction) => {
-
-  console.log("ExceptionsHandler : ", err)
   
   if (res.headersSent) {
     return next(err)

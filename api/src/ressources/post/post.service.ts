@@ -16,7 +16,7 @@ class PostService {
         
         if(page > 1) offset = (page - 1) * limit
 
-        const queryBuilder =  await this.postRepository.createQueryBuilder("post")
+        const queryBuilder = await this.postRepository.createQueryBuilder("post")
             .leftJoinAndSelect("post.category", "category")
             
         if (query.category) {

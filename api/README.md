@@ -22,3 +22,15 @@ findOne, delete, update, create, findAll
 Add relation
 One Category have Many Post
 Many Post have One Category
+
+
+
+
+Create ressource Tag
+{
+    "name"
+}
+
+ManoToMany
+One post have Many Tags
+One Tag have Many Posts

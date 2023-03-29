@@ -3,6 +3,6 @@ export type CategoryCreateDTO = {
 }
 
 export type CategoryUpdateDTO = {
-    id: number
+    id?: number
     name?: string
 }
