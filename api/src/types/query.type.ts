@@ -3,4 +3,5 @@ export type QueryType = {
     offset?: number;
     order?: "ASC" | "DESC";
     category?: string;
+    page?: number;
 }

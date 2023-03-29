@@ -9,23 +9,24 @@ class PostService {
     ) {}
 
     async findAll(query: QueryType) {
-        const limit = query.limit || 2
-        const offset = query.offset || 0
+        let limit = query.limit || 2
+        let offset = query.offset || 0
+        let page = query.page || 1
+        let order = query.order || "DESC"
+        
+        if(page > 1) offset = (page - 1) * limit
 
         const queryBuilder =  await this.postRepository.createQueryBuilder("post")
             .leftJoinAndSelect("post.category", "category")
             
         if (query.category) {
-            await queryBuilder.andWhere("category.name = :category", { category: query.category })
-        }
-
-        if(query.order) {
-            await queryBuilder.orderBy("post.createdAt", query.order)
+            await queryBuilder.where("category.name = :category", { category: query.category })
         }
 
         const [data, count] = await queryBuilder
+                .orderBy("post.createdAt", order)
                 .offset(offset)
-                .take(limit)
+                .limit(limit)
                 .getManyAndCount()
 
         return {
